@@ -3,6 +3,7 @@ import os
 import time
 import datetime
 from myDatabase import *
+from myQuestions import *
 
 
 def clearConsole():
@@ -36,6 +37,7 @@ def askingName():
 
 def theGame():
     explanation = open("story/explanation.txt", "r")
+    os.system('color 2')
     print(explanation.read())
     try:
         input("Press enter to continue")
@@ -58,6 +60,44 @@ def loadingGame():
     except SyntaxError:
         pass
     print("")
+
+def questions():
+    operatorList = ["+","-","x","÷"]
+    x = 0
+    correctOrNot = 0
+    totalAnswersCorrect = 0
+    totalAnswersIncorrect = 0
+    for questions in range (1,15):
+        number1 = random.randint(1,15)
+        number2 = random.randint(1,10)
+
+        if x == 0:
+            correctAnswer = number1 + number2
+        elif x == 1:
+            correctAnswer = number1 - number2
+        elif x == 2:
+            correctAnswer = number1 * number2
+        elif x == 3:
+            while number1 % number2:
+                number1 = random.randint(1,15)
+                number2 = random.randint(1,10)
+            correctAnswer = number1 / number2
+            x = 0
+        progressBar(correctOrNot + 2, correctOrNot);
+        operator = operatorList[x]
+        print("what is:", number1, operatorList[x], number2, "?")
+        answer = input("Answer: ")
+        try: 
+            val = int(answer)
+        except SyntaxError and ValueError:
+            print("You didn't answer the question")
+            time.sleep(1)
+            clearConsole();
+            progressBar(correctOrNot + 2, correctOrNot);
+            pass
+        questionsCheck.questionChecking();
+
+
 
 '''def questions():
     correctOrNot = 0
@@ -126,7 +166,6 @@ loadingGame();
 progressBar(2, 22);  
 theGame();
 questions();
-
 
 dataBaseInput.dataBaseCommit();
 #start();

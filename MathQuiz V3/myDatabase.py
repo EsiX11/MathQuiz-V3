@@ -2,7 +2,6 @@ import sqlite3
 from sqlite3 import Error
 conn = sqlite3.connect('test.db')
 
-
 class dataBase():
 
     def dataBaseTests():
@@ -23,7 +22,7 @@ class dataBase():
                     Number2 INTEGER,
                     Answer INTEGER,
                     AnswerGiven INTEGER,
-                    Correct INTEGER,
+                    Correct TEXT,
                     testID INTEGER)
                     ''')
 
@@ -42,12 +41,13 @@ class dataBaseInput:
         c.execute(''' INSERT INTO Tests (Name,Surname,Class)
                     VALUES (?, ?, ?)
                     ''', (Name,Surname,Class))
-    def dataBaseSaveQuestions():
 
+    def dataBaseSaveQuestions(number1, operator, number2, Answer, AnswerGiven, Correct):
         c = conn.cursor()
-        c.execute(''' INSERT INTO Questions (Operand1, Operator, Operand2, ExpectedAnswer, Answer, Correct)
+        c.execute(''' INSERT INTO Questions (number1, operator, number2, Answer, AnswerGiven, Correct)
                     VALUES (?, ?, ?, ?, ?, ?)
-                    ''', (operand1, operator, operand2, eAnswer, sAnswer, correct))
+                    ''', (number1, operator, number2, Answer, AnswerGiven, Correct))
+
     def dataBaseResults():
         c = conn.cursor()
         c.execute(''' INSERT INTO Results (Operand1, Operator, Operand2, ExpectedAnswer, Answer, Correct)

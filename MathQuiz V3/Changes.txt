@@ -15,5 +15,10 @@ Version 1.0 (7/5/19):
 		1. renew questions with random numbers
 		2. Add more story in between questions
 		3. get foreign keys to work
-		4. 
-	
+
+Version 1.1 (7/5/19):
+	Changed correct in database from INTERGER to TEXT
+	added random numbers for questions
+	added saving the question to database (Not tested yet)
+	added myQuestions
+	Broke code with myQuestions class
