@@ -1,0 +1,19 @@
+Version 1.0 (7/5/19):
+	Added database support
+		Can now create and edit databases
+		Working user data input
+		Other databases are not tested yet and not used yet
+		creates all databases correctly
+		Still needs the right keys
+	Broke questions() functions
+		needs to be renewed
+	removed savegame() function
+		not used anymore
+		replaced by databases
+
+	to do:
+		1. renew questions with random numbers
+		2. Add more story in between questions
+		3. get foreign keys to work
+		4. 
+	

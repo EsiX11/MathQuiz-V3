@@ -1,0 +1,7 @@
+You need to help the space ship crew to run away from the aliens. 
+It's up to you to make the calculations for the hyper drive.
+With every correct answer you charge the hyper drive.
+Incorrect answers won't charge to the hyper drive.
+If the drive is not charged before you reach the end.
+The aliens will get you and you won't make it out.
+Can you hit hyper space before the aliens get to you?
