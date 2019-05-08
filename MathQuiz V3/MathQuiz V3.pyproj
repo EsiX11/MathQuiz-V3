@@ -25,9 +25,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MathQuiz_V3.py" />
-    <Compile Include="myQuestions.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Changes.txt" />

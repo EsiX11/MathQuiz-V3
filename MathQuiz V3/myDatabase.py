@@ -4,6 +4,7 @@ conn = sqlite3.connect('test.db')
 
 class dataBase():
 
+
     def dataBaseTests():
         c = conn.cursor()
         c.execute(''' CREATE TABLE IF NOT EXISTS Tests  (
@@ -15,6 +16,7 @@ class dataBase():
 
     def dataBaseQuestions():
         c = conn.cursor()
+        c.execute('PRAGMA foreign_keys = ON')
         c.execute(''' CREATE TABLE IF NOT EXISTS Questions  (
                     ID INTEGER PRIMARY KEY AUTOINCREMENT,
                     Number1 INTEGER,
@@ -23,16 +25,22 @@ class dataBase():
                     Answer INTEGER,
                     AnswerGiven INTEGER,
                     Correct TEXT,
-                    testID INTEGER)
+                    testID INTEGER,
+                    CONSTRAINT fk_tests
+                        FOREIGN KEY (testID)
+                        REFERENCES Tests (testID))
                     ''')
 
     def dataBaseResults():
         c = conn.cursor()
         c.execute(''' CREATE TABLE IF NOT EXISTS Results  (
-                    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    ResultID INTEGER PRIMARY KEY AUTOINCREMENT,
                     Answer INTEGER,
                     Correct INTEGER,
-                    testID INTEGER)
+                    testID INTEGER,
+                    CONSTRAINT fk_tests
+                        FOREIGN KEY(testID)
+                        REFERENCES Tests(testID))
                     ''')
 
 class dataBaseInput:

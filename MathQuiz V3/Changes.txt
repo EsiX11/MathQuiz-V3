@@ -22,3 +22,9 @@ Version 1.1 (7/5/19):
 	added saving the question to database (Not tested yet)
 	added myQuestions
 	Broke code with myQuestions class
+
+Version 1.2 (8/5/19):
+	removed myQuestions class from program.
+	Added foreign key
+	Now loops through the questions correctly unless not a number is given
+	foreign keys still not working
