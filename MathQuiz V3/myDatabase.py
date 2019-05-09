@@ -1,6 +1,8 @@
 import sqlite3
 from sqlite3 import Error
 conn = sqlite3.connect('test.db')
+c = conn.cursor()
+c.execute('PRAGMA foreign_keys = ON')
 
 class dataBase():
 
@@ -16,7 +18,7 @@ class dataBase():
 
     def dataBaseQuestions():
         c = conn.cursor()
-        c.execute('PRAGMA foreign_keys = ON')
+
         c.execute(''' CREATE TABLE IF NOT EXISTS Questions  (
                     ID INTEGER PRIMARY KEY AUTOINCREMENT,
                     Number1 INTEGER,
@@ -25,10 +27,10 @@ class dataBase():
                     Answer INTEGER,
                     AnswerGiven INTEGER,
                     Correct TEXT,
-                    testID INTEGER,
+                    test_ID INTEGER,
                     CONSTRAINT fk_tests
-                        FOREIGN KEY (testID)
-                        REFERENCES Tests (testID))
+                        FOREIGN KEY(test_ID)
+                        REFERENCES Tests(testID))
                     ''')
 
     def dataBaseResults():

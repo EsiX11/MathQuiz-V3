@@ -46,6 +46,7 @@ def theGame():
         pass
     print("")
     clearConsole();
+    explanation.close()
 
 #loadingGame (Done)
 def loadingGame():
@@ -63,18 +64,37 @@ def loadingGame():
         pass
     print("")
 
-def endGame(correctOrNot):
+#Not done yet
+def stageSelector(stage,totalTime,correctOrNot):
+    questions(16,0,stage);
     progressBar(correctOrNot + 2, correctOrNot);
-    print("You won")
+    if correctOrNot < 20:
+        youLost = open("story/lost.txt","r")
+        print(youLost.read())
+        youLost.close()
+        #dataBaseInput.dataBaseResults()
+        time.sleep(3)
+    else:
+        stageWon = open("story/stageWon" + stage + ".txt", "r")
+        print(stageWon.read())
 
-def questions():
+        if stage == 1:
+            s.stageOne(correctOrNot);
+        elif stage == 2:
+            s.stageTwo(correctOrNot);
+        elif stage == 3:
+            stageThree(correctOrNot);
+        time.sleep(2)
+        clearConsole();
+
+def questions(rangeQuestions,correctOrNot,stage):
     operatorList = ["+","-","x","/"]
     x = 0
-    correctOrNot = 0
     totalAnswersCorrect = 0
     totalAnswersIncorrect = 0
+    totalTime = 0
     operator = operatorList[x]
-    for questions in range (1,15):
+    for questions in range (1,rangeQuestions):
         number1 = random.randint(1,15)
         number2 = random.randint(1,10)
         loop = True
@@ -93,30 +113,40 @@ def questions():
         while loop:
             progressBar(correctOrNot + 2, correctOrNot);
             print("what is:", number1, operatorList[x], number2, "?")
+            startTime = time.time()
             answer = input("Answer: ")
             try: 
                 val = int(answer)
                 loop = False
-
             except SyntaxError and ValueError:
                 print("You didn't answer the question")
                 time.sleep(1)
                 clearConsole();
                 pass
+        
         if int(answer) == correctAnswer:
             answerCorrect = "Correct"
             correctOrNot += 2
+            
         else:
             answerCorrect = "Incorrect"
+            
+        endTime = time.time()
         x += 1
         print(answerCorrect)
+        splitTime = round(endTime - startTime,3)
+        totalTime = round(totalTime + splitTime,3)
+        print("Time: ", splitTime)
         dataBaseInput.dataBaseSaveQuestions(number1, operator, number2, correctAnswer, answer, answerCorrect)
         print(correctOrNot)
+        print(totalTime)
         time.sleep(1)
         if x > 3:
             x = 0
     
-    endGame(correctOrNot);
+    return(correctOrNot,totalTime,correctOrNot)
+    
+
 
 def dataBaseCreation():
     DB = dataBase
@@ -129,11 +159,12 @@ dataBaseCreation();
 #Askingname speaks for it selfs. Uses the info the player gives to correctly save it.
 askingName();
 #loadingGame is just a visual loading bar nothing else
-loadingGame();
+#loadingGame();
 #progressBar is the progress bar at the top of the game. Keeping progress of the players progress.
 progressBar(2, 0);  
 theGame();
-questions();
+stageSelector(1,0,0);
+#questions(16,0,1);
 
 dataBaseInput.dataBaseCommit();
 #start();

@@ -1,8 +1,0 @@
-01/05/19
-Name: olaf
-Class: 2
-
-Correcty answered: 15
-Incorrecty answered: 0
-Percentage correct:100.0%
-
