@@ -1,7 +1,5 @@
-You need to help the space ship crew to run away from the space pirates. 
-It's up to you to make the calculations for the hyper drive.
-With every correct answer you charge the hyper drive.
-Incorrect answers won't charge to the hyper drive.
-If the drive is not charged before you reach the end.
-The space pirates will get you and you won't make it out.
-Can you hit hyper space before the space pirates get to you?
+You need to help the crew of the space ship with your calculations.
+The computer will give you calculations you have to solve.
+Every correct answer will charge the drive.
+If you get the answer incorrect it won't.
+You gotta get enough answers correct to be save of the danger.

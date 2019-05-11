@@ -1,0 +1,21 @@
+def stageSelector(stage,totalTime,correctOrNot):
+    questions(15,0,stage);
+    progressBar(correctOrNot + 2, correctOrNot);
+    if correctOrNot < 20:
+        youLost = open("story/lost.txt","r")
+        print(youLost.read())
+        youLost.close()
+        #dataBaseInput.dataBaseResults()
+        time.sleep(3)
+    else:
+        stageWon = open("story/stageWon" + stage + ".txt", "r")
+        print(stageWon.read())
+
+        if stage == 1:
+            s.stageOne(correctOrNot);
+        elif stage == 2:
+            s.stageTwo(correctOrNot);
+        elif stage == 3:
+            stageThree(correctOrNot);
+        time.sleep(2)
+        clearConsole();

@@ -18,18 +18,17 @@ class dataBase():
 
     def dataBaseQuestions():
         c = conn.cursor()
-
         c.execute(''' CREATE TABLE IF NOT EXISTS Questions  (
-                    ID INTEGER PRIMARY KEY AUTOINCREMENT,
                     Number1 INTEGER,
                     Operator TEXT,
                     Number2 INTEGER,
                     Answer INTEGER,
                     AnswerGiven INTEGER,
                     Correct TEXT,
-                    test_ID INTEGER,
+                    Time_taken TEXT,
+                    testID INTEGER,
                     CONSTRAINT fk_tests
-                        FOREIGN KEY(test_ID)
+                        FOREIGN KEY(testID)
                         REFERENCES Tests(testID))
                     ''')
 
@@ -37,8 +36,9 @@ class dataBase():
         c = conn.cursor()
         c.execute(''' CREATE TABLE IF NOT EXISTS Results  (
                     ResultID INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Answer INTEGER,
-                    Correct INTEGER,
+                    Correctly_answerd INTEGER,
+                    Total_time INTEGER,
+                    Final_Stage INTERGER,
                     testID INTEGER,
                     CONSTRAINT fk_tests
                         FOREIGN KEY(testID)
@@ -52,23 +52,21 @@ class dataBaseInput:
                     VALUES (?, ?, ?)
                     ''', (Name,Surname,Class))
 
-    def dataBaseSaveQuestions(number1, operator, number2, Answer, AnswerGiven, Correct):
+    def dataBaseSaveQuestions(number1, operator, number2, Answer, AnswerGiven, Correct, Time):
         c = conn.cursor()
-        c.execute(''' INSERT INTO Questions (number1, operator, number2, Answer, AnswerGiven, Correct)
-                    VALUES (?, ?, ?, ?, ?, ?)
-                    ''', (number1, operator, number2, Answer, AnswerGiven, Correct))
+        c.execute(''' INSERT INTO Questions (number1, operator, number2, Answer, AnswerGiven, Correct, Time_taken)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ''', (number1, operator, number2, Answer, AnswerGiven, Correct, Time))
 
-    def dataBaseResults():
+    def dataBaseResults(totalCorrectAnswers, totalTime , stage):
         c = conn.cursor()
-        c.execute(''' INSERT INTO Results (Operand1, Operator, Operand2, ExpectedAnswer, Answer, Correct)
-                    VALUES (?, ?, ?, ?, ?, ?)
-                    ''', (operand1, operator, operand2, eAnswer, sAnswer, correct))
+        c.execute(''' INSERT INTO Results (Correctly_answerd, Total_time, Final_Stage)
+                    VALUES (?, ?, ?)
+                    ''', (totalCorrectAnswers, totalTime, stage))
 
     # Commmit the changes
     def dataBaseCommit():
-
         conn.commit()
-
         conn.close()
 
 

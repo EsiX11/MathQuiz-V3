@@ -45,7 +45,6 @@ def theGame():
     except SyntaxError:
         pass
     print("")
-    clearConsole();
     explanation.close()
 
 #loadingGame (Done)
@@ -65,36 +64,49 @@ def loadingGame():
     print("")
 
 #Not done yet
-def stageSelector(stage,totalTime,correctOrNot):
-    questions(16,0,stage);
-    progressBar(correctOrNot + 2, correctOrNot);
-    if correctOrNot < 20:
-        youLost = open("story/lost.txt","r")
-        print(youLost.read())
-        youLost.close()
-        #dataBaseInput.dataBaseResults()
-        time.sleep(3)
-    else:
-        stageWon = open("story/stageWon" + stage + ".txt", "r")
-        print(stageWon.read())
-
-        if stage == 1:
-            s.stageOne(correctOrNot);
-        elif stage == 2:
-            s.stageTwo(correctOrNot);
-        elif stage == 3:
-            stageThree(correctOrNot);
-        time.sleep(2)
+def stageSelector(stage,correctOrNot):
+    rangeQuestions = 0
+    totalCorrectAnswers = 0
+    totalTime = 0
+    for stages in range(0,5):
         clearConsole();
+        stage += 1
+        if stage > 1 and correctOrNot < 10:
+            print("You lost")
+            stage -= 1
+            break
+        else: 
+            if stage == 1:
+                stagePrint = open("story/stage1.txt", "r")
+                rangeQuestions = 15
+            elif stage == 2:
+                stagePrint = open("story/stage2.txt","r")
+                rangeQuestions = 15
+            elif stage == 3:
+                stagePrint = open("story/stage3.txt","r")
+                rangeQuestions = 15
+            elif stage == 4:
+                stagePrint = open("story/stage4.txt","r")
+                rangeQuestions = 15
+            print(stagePrint.read())
+            try:
+                input("Press enter to continue")
+            except SyntaxError:
+                pass
+            q = questions(rangeQuestions,0,stage,0)
+            correctOrNot = q[0] / 2
+            totalCorrectAnswers = correctOrNot + totalCorrectAnswers
+            totalTime = q[1] + totalTime            
+    dataBaseInput.dataBaseResults(correctOrNot,totalTime,stage)
+    print("You won well done")
 
-def questions(rangeQuestions,correctOrNot,stage):
+
+def questions(rangeQuestions,correctOrNot,stage,totalTime):
     operatorList = ["+","-","x","/"]
     x = 0
-    totalAnswersCorrect = 0
-    totalAnswersIncorrect = 0
-    totalTime = 0
+    totalTimeStage = 0
     operator = operatorList[x]
-    for questions in range (1,rangeQuestions):
+    for questions in range (0,rangeQuestions):
         number1 = random.randint(1,15)
         number2 = random.randint(1,10)
         loop = True
@@ -109,11 +121,10 @@ def questions(rangeQuestions,correctOrNot,stage):
                 number1 = random.randint(1,15)
                 number2 = random.randint(1,10)
             correctAnswer = number1 / number2
-         
+        startTime = time.time() 
         while loop:
             progressBar(correctOrNot + 2, correctOrNot);
             print("what is:", number1, operatorList[x], number2, "?")
-            startTime = time.time()
             answer = input("Answer: ")
             try: 
                 val = int(answer)
@@ -135,19 +146,15 @@ def questions(rangeQuestions,correctOrNot,stage):
         x += 1
         print(answerCorrect)
         splitTime = round(endTime - startTime,3)
-        totalTime = round(totalTime + splitTime,3)
+        totalTimeStage = round(totalTimeStage + splitTime,3)
         print("Time: ", splitTime)
-        dataBaseInput.dataBaseSaveQuestions(number1, operator, number2, correctAnswer, answer, answerCorrect)
-        print(correctOrNot)
-        print(totalTime)
+        dataBaseInput.dataBaseSaveQuestions(number1, operator, number2, correctAnswer, answer, answerCorrect,splitTime)
         time.sleep(1)
         if x > 3:
             x = 0
     
-    return(correctOrNot,totalTime,correctOrNot)
+    return(correctOrNot,totalTimeStage,stage)
     
-
-
 def dataBaseCreation():
     DB = dataBase
     DB.dataBaseTests();
@@ -159,11 +166,11 @@ dataBaseCreation();
 #Askingname speaks for it selfs. Uses the info the player gives to correctly save it.
 askingName();
 #loadingGame is just a visual loading bar nothing else
-#loadingGame();
+loadingGame();
 #progressBar is the progress bar at the top of the game. Keeping progress of the players progress.
 progressBar(2, 0);  
 theGame();
-stageSelector(1,0,0);
+stageSelector(0,0);
 #questions(16,0,1);
 
 dataBaseInput.dataBaseCommit();
