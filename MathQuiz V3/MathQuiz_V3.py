@@ -3,7 +3,8 @@ import os
 import time
 import datetime
 from myDatabase import *
-
+import re
+#import art
 
 def clearConsole():
     os.system('cls')
@@ -32,27 +33,35 @@ def progressBar(line,space):
 def askingName(): 
     loop1 = True
     loop2 = True
+    loop3 = True
+    re1 = re.compile('[@!#$%^&*()<>?/\|}{~:0-9]')
+    re2 = re.compile('[@!#$%^&*()<>?/\|}{~:]')
     while loop1:
         playerName = input("What is your name?: ")
-        if not playerName.isalpha() or len(playerName) > 15:
+        if not re1.search(playerName) == None or len(playerName) > 15 or len(playerName) < 1 or playerName.isspace():
             print ("Illegal character in name or name is too long")
-        if playerName.isalpha() and len(playerName) <= 15:
+        else:
             loop1 = False
     while loop2:
         playerSurname = input("What is your surname?: ")
-        testName = playerSurname.replace(' ','')
-        if not testName.isalpha() or len(testName) > 20:
+        if not re1.search(playerSurname) == None or len(playerSurname) > 20 or len(playerSurname) < 1 or playerSurname.isspace():
             print ("Illegal character in name or name is too long")
-        if testName.isalpha() and len(testName) <= 15:
+        else:
             loop2 = False
-
-    playerClass = input("Which is your class?:")      
+    while loop3:
+        playerClass = input("Which is your class?:")     
+        if not re2.search(playerClass) or len(playerClass) > 20 or len(playerClass) < 1 or playerClass.isspace():
+            print ("Illegal character in name or name is too long")
+        else:
+            loop3 = False
     dataBaseInput.dataBaseTests(playerName, playerSurname, playerClass) 
 
 #theGame (Done)
 def theGame():
+    spaceShip = open("code/spaceShip.txt","r")
     explanation = open("story/explanation.txt", "r")
     os.system('color 2')
+    print(spaceShip.read())
     print(explanation.read())
     try:
         input("Press enter to continue")
@@ -185,6 +194,7 @@ def dataBaseCreation():
 #creating the databases tables for saving data
 dataBaseCreation();
 #Askingname speaks for it selfs. Uses the info the player gives to correctly save it.
+
 askingName();
 #loadingGame is just a visual loading bar nothing else
 loadingGame();

@@ -42,3 +42,7 @@ Version 1.4 (15/5/19):
 	Changed Database file name to Quiz from test
 	added story to TXT files
 	To add lost per level
+
+Version 1.4.1
+	Added correct check for name
+	Added art
