@@ -1,1 +1,4 @@
-Test 4 Stage 4
+We have successfully landed on the planet.
+Can you charge the scanner to see if there
+are any dangerous creatures on this planet.
+We don't want to be eaten do we.

@@ -1,11 +1,10 @@
 import sqlite3
 from sqlite3 import Error
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('Quiz.db')
 c = conn.cursor()
 c.execute('PRAGMA foreign_keys = ON')
 
 class dataBase():
-
 
     def dataBaseTests():
         c = conn.cursor()

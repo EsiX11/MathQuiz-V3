@@ -19,7 +19,7 @@ def progressBar(line,space):
         x = open("Code/x.txt","r")
         print("Progess: [" + lines.read(24) + ">" + spaces.read(0) + "]")
         print("Overdrive!: [" + x.read(line-20) + ">" + spaces.read(space) + "]")
-        print("You unlocked the overdrive. You're save from the aliens but you can never be to sure")
+        print("You unlocked the overdrive. You're save but you can never be to sure")
         x.close()
     else:
         space = 22 - space
@@ -30,9 +30,23 @@ def progressBar(line,space):
  
 #asking name (Done)   
 def askingName(): 
-    playerName = input("What is your name?: ")
-    playerSurname = input("What is your surname?: ")
-    playerClass = input("Which is your class?:")
+    loop1 = True
+    loop2 = True
+    while loop1:
+        playerName = input("What is your name?: ")
+        if not playerName.isalpha() or len(playerName) > 15:
+            print ("Illegal character in name or name is too long")
+        if playerName.isalpha() and len(playerName) <= 15:
+            loop1 = False
+    while loop2:
+        playerSurname = input("What is your surname?: ")
+        testName = playerSurname.replace(' ','')
+        if not testName.isalpha() or len(testName) > 20:
+            print ("Illegal character in name or name is too long")
+        if testName.isalpha() and len(testName) <= 15:
+            loop2 = False
+
+    playerClass = input("Which is your class?:")      
     dataBaseInput.dataBaseTests(playerName, playerSurname, playerClass) 
 
 #theGame (Done)
@@ -68,7 +82,7 @@ def stageSelector(stage,correctOrNot):
     rangeQuestions = 0
     totalCorrectAnswers = 0
     totalTime = 0
-    for stages in range(0,5):
+    for stages in range(0,4):
         clearConsole();
         stage += 1
         if stage > 1 and correctOrNot < 10:
@@ -79,36 +93,43 @@ def stageSelector(stage,correctOrNot):
             if stage == 1:
                 stagePrint = open("story/stage1.txt", "r")
                 rangeQuestions = 15
+                difficultyQuestions1 = [1,15]
+                difficultyQuestions2 = [1,10]
             elif stage == 2:
                 stagePrint = open("story/stage2.txt","r")
                 rangeQuestions = 15
+                difficultyQuestions1 = [1,15]
+                difficultyQuestions2 = [5,15]
             elif stage == 3:
                 stagePrint = open("story/stage3.txt","r")
                 rangeQuestions = 15
+                difficultyQuestions1 = [10,20]
+                difficultyQuestions2 = [5,15]
             elif stage == 4:
                 stagePrint = open("story/stage4.txt","r")
                 rangeQuestions = 15
+                difficultyQuestions1 = [10,20]
+                difficultyQuestions2 = [10,30]
             print(stagePrint.read())
             try:
                 input("Press enter to continue")
             except SyntaxError:
                 pass
-            q = questions(rangeQuestions,0,stage,0)
+            q = questions(rangeQuestions,0,stage,0,difficultyQuestions1,difficultyQuestions2)
             correctOrNot = q[0] / 2
             totalCorrectAnswers = correctOrNot + totalCorrectAnswers
             totalTime = q[1] + totalTime            
     dataBaseInput.dataBaseResults(correctOrNot,totalTime,stage)
-    print("You won well done")
+    
 
-
-def questions(rangeQuestions,correctOrNot,stage,totalTime):
+def questions(rangeQuestions,correctOrNot,stage,totalTime,difficultyQuestions1,difficultyQuestions2):
     operatorList = ["+","-","x","/"]
     x = 0
     totalTimeStage = 0
     operator = operatorList[x]
     for questions in range (0,rangeQuestions):
-        number1 = random.randint(1,15)
-        number2 = random.randint(1,10)
+        number1 = random.randint(difficultyQuestions1[0],difficultyQuestions1[1])
+        number2 = random.randint(difficultyQuestions2[0],difficultyQuestions2[1])
         loop = True
         if x == 0:
             correctAnswer = number1 + number2
@@ -118,8 +139,8 @@ def questions(rangeQuestions,correctOrNot,stage,totalTime):
             correctAnswer = number1 * number2
         elif x == 3:
             while number1 % number2:
-                number1 = random.randint(1,15)
-                number2 = random.randint(1,10)
+                number1 = random.randint(difficultyQuestions1[0],difficultyQuestions1[1])
+                number2 = random.randint(difficultyQuestions2[0],difficultyQuestions2[1])
             correctAnswer = number1 / number2
         startTime = time.time() 
         while loop:
@@ -171,7 +192,4 @@ loadingGame();
 progressBar(2, 0);  
 theGame();
 stageSelector(0,0);
-#questions(16,0,1);
-
 dataBaseInput.dataBaseCommit();
-#start();
