@@ -33,8 +33,8 @@ def askingName():
     loop1 = True
     loop2 = True
     loop3 = True
-    re1 = re.compile('[@!#$%^&*()<>?/\|}{~:0-9]')
-    re2 = re.compile('[@!#$%^&*()<>?/\|}{~:]')
+    re1 = re.compile('[@!#$%^&*()<>?/\\\|}{~:0-9`=+;]')
+    re2 = re.compile('[@!#$%^&*()<>?/\\\|}{~:=+`;]')
     while loop1:
         playerName = input("What is your name?: ")
         if not re1.search(playerName) == None or len(playerName) > 15 or len(playerName) < 1 or playerName.isspace():
@@ -219,7 +219,7 @@ dataBaseCreation();
 
 askingName();
 #loadingGame is just a visual loading bar nothing else
-loadingGame();
+#loadingGame();
 #progressBar is the progress bar at the top of the game. Keeping progress of the players progress.
 progressBar(2, 0);  
 theGame();
