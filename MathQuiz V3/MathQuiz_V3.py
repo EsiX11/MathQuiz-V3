@@ -50,7 +50,7 @@ def askingName():
             loop2 = False
     while loop3:
         playerClass = input("Which is your class?:")     
-        if not re2.search(playerClass) or len(playerClass) > 20 or len(playerClass) < 1 or playerClass.isspace():
+        if not re2.search(playerClass) == None or len(playerClass) > 20 or len(playerClass) < 1 or playerClass.isspace():
             print ("Illegal character in name or name is too long")
         else:
             loop3 = False
@@ -145,6 +145,11 @@ def questions(rangeQuestions,correctOrNot,stage,totalTime,difficultyQuestions1,d
         elif x == 1:
             correctAnswer = number1 - number2
         elif x == 2:
+            while number1 > 12 or number2 > 12:
+                if number1 > 12:
+                    number1 = random.randint(difficultyQuestions1[0],12)
+                if number2 > 12:
+                    number2 = random.randint(difficultyQuestions2[0],12)
             correctAnswer = number1 * number2
         elif x == 3:
             while number1 % number2:

@@ -1,3 +1,22 @@
+         __
+        / /\
+       / /  \
+      / /    \__________
+     / /      \        /\
+    /_/        \      / /
+ ___\ \      ___\____/_/_
+/____\ \    /___________/\
+\     \ \   \           \ \
+ \     \ \   \____       \ \
+  \     \ \  /   /\       \ \
+   \   / \_\/   / /        \ \
+    \ /        / /__________\/
+     /        / /     /
+    /        / /     /
+   /________/ /\    /
+   \________\/\ \  /
+               \_\/
+
 Space pirates have been spotted.
 Quickly help us charge the hyperdrive.
 If we aren't able to get away from the space pirates.

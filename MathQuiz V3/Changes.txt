@@ -46,3 +46,8 @@ Version 1.4 (15/5/19):
 Version 1.4.1
 	Added correct check for name
 	Added art
+
+Version 1.4.2
+	Added more art to story
+	Added more story to stages
+	Fixed class user input to accept numbers
