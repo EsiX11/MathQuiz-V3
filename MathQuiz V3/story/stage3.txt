@@ -1,6 +1,22 @@
 Well done we escaped the blackhole.
 This time we did check our destination.
 
+o               .        ___---___                    .                   
+       .              .--\        --.     .     .         .
+                    ./.;_.\     __/~ \.     
+                   /;  / `-'  __\    . \                            
+ .        .       / ,--'     / .   .;   \        |
+                 | .|       /       __   |      -O-       .
+                |__/    __ |  . ;   \ | . |      |
+                |      /  \\_    . ;| \___|    
+   .    o       |      \  .~\\___,--'     |           .
+                 |     | . ; ~~~~\_    __|
+    |             \    \   .  .  ; \  /_/   .
+   -O-        .    \   /         . |  ~/                  .
+    |    .          ~\ \   .      /  /~          o
+  .                   ~--___ ; ___--~       
+                 .          ---         .              -JT
+
 After warping away from that blackhole.
 We ended up next to a planet we would like to explore.
 Calculate how fast be need to burn the thrusters

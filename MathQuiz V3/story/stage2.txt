@@ -4,6 +4,27 @@ We didn't check the destination
 of our warp and we ended up next
 to a blackhole
 
+                   ______
+               -~~`      `~~~~---,__
+                                    `~-.
+             __,--~~~~~~---,__          `\
+         _/~~                 `~-,_       `\
+      _/~                          `\       `.
+    /'          _,--~~~~~--,_        `\      `\
+  /'         /~~             ~\        |       |
+ /'        /'     __,---,_     `\      `|      `|
+.'       ,'     /~        ~~\    `.     |       |
+|        |     |      /~~\   |    |     `|      |
+|        |     |     |   '   |    |      |      |
+|        |     |     `\.__,-'    .'      |      |
+`|        \     `\_             /       .'     .'
+ `|        `\      `--,_____,--'       /       |
+   \         `\                      /'       /
+    `\         `-,__            _,--'      _/'
+      `\_           ~~~------~~~       _,-~
+         ~~--_                   ___,-~
+              `~~~~~------'~~~~~'
+
 Now we are too close to a blackhole.
 We have to charge the hyperdrive.
 We have to be quick before the blackholes

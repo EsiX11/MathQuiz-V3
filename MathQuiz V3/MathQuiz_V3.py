@@ -4,7 +4,6 @@ import time
 import datetime
 from myDatabase import *
 import re
-#import art
 
 def clearConsole():
     os.system('cls')
@@ -95,8 +94,21 @@ def stageSelector(stage,correctOrNot):
         clearConsole();
         stage += 1
         if stage > 1 and correctOrNot < 10:
-            print("You lost")
+            os.system('color 4')
+            print("You lost\n")
             stage -= 1
+            if stage == 1:
+                print("Ooh no the pirates got you.\nThey took all the loot in the ship.\nBetter luck next")
+            elif stage == 2:
+                print("Ooh no your ship got devoured by the blackhole\nThere is nothing left of it.")
+            elif stage == 3:
+               print("Ooh no you slammed into the planet\n You hit it so hard that the ship evaporated")
+            elif stage == 4:
+               print("There were creatures on this planet\nThey are also hostile.\nYou didn't know they were there\nAnd they attacked you in your sleep.")
+            try:
+                input("\nPress enter to continue")
+            except SyntaxError:
+                pass
             break
         else: 
             if stage == 1:
@@ -105,16 +117,19 @@ def stageSelector(stage,correctOrNot):
                 difficultyQuestions1 = [1,15]
                 difficultyQuestions2 = [1,10]
             elif stage == 2:
+                os.system('color F0')
                 stagePrint = open("story/stage2.txt","r")
                 rangeQuestions = 15
                 difficultyQuestions1 = [1,15]
                 difficultyQuestions2 = [5,15]
             elif stage == 3:
+                os.system('color 1A') 
                 stagePrint = open("story/stage3.txt","r")
                 rangeQuestions = 15
                 difficultyQuestions1 = [10,20]
                 difficultyQuestions2 = [5,15]
             elif stage == 4:
+                os.system('color 21') 
                 stagePrint = open("story/stage4.txt","r")
                 rangeQuestions = 15
                 difficultyQuestions1 = [10,20]
@@ -127,7 +142,9 @@ def stageSelector(stage,correctOrNot):
             q = questions(rangeQuestions,0,stage,0,difficultyQuestions1,difficultyQuestions2)
             correctOrNot = q[0] / 2
             totalCorrectAnswers = correctOrNot + totalCorrectAnswers
-            totalTime = q[1] + totalTime            
+            totalTime = q[1] + totalTime
+    if stage >= 4:
+        print("You win")
     dataBaseInput.dataBaseResults(correctOrNot,totalTime,stage)
     
 
