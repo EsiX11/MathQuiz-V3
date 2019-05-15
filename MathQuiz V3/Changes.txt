@@ -55,6 +55,13 @@ Version 1.4.2 (14/5/19):
 	Added colour per level.
 	Added art per level
 
-Versoin 1.4.3 (14/5/19):
+Version 1.4.3 (14/5/19):
 	Added more illegal characters
 	Added doc for testing.
+
+Version 1.5 (15/5/19):
+	Foreign keys work the way I want it to work.
+	Fixed operator not showing the correct in database
+	Fixed correctly answered not showing the correct number in database
+	Some grammer checks
+	Finished testing code.doc

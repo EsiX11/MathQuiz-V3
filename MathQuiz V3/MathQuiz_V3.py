@@ -85,7 +85,7 @@ def loadingGame():
         pass
     print("")
 
-#Not done yet
+#stageSelector (Done_=)
 def stageSelector(stage,correctOrNot):
     rangeQuestions = 0
     totalCorrectAnswers = 0
@@ -98,13 +98,13 @@ def stageSelector(stage,correctOrNot):
             print("You lost\n")
             stage -= 1
             if stage == 1:
-                print("Ooh no the pirates got you.\nThey took all the loot in the ship.\nBetter luck next")
+                print("Ooh no the pirates got you.\nThey took all the loot in the ship.\nBetter luck next time")
             elif stage == 2:
                 print("Ooh no your ship got devoured by the blackhole\nThere is nothing left of it.")
             elif stage == 3:
-               print("Ooh no you slammed into the planet\n You hit it so hard that the ship evaporated")
+               print("Ooh no you slammed into the planet\n You hit the ground so hard that the ship evaporated")
             elif stage == 4:
-               print("There were creatures on this planet\nThey are also hostile.\nYou didn't know they were there\nAnd they attacked you in your sleep.")
+               print("There were creatures on this planet\nThey are also hostile.\nYou didn't know they were on this planet.\nThey attacked you in your sleep.")
             try:
                 input("\nPress enter to continue")
             except SyntaxError:
@@ -140,19 +140,18 @@ def stageSelector(stage,correctOrNot):
             except SyntaxError:
                 pass
             q = questions(rangeQuestions,0,stage,0,difficultyQuestions1,difficultyQuestions2)
-            correctOrNot = q[0] / 2
-            totalCorrectAnswers = correctOrNot + totalCorrectAnswers
+            test1 = q[0] / 2
+            totalCorrectAnswers = int(test1 + totalCorrectAnswers)
             totalTime = q[1] + totalTime
     if stage >= 4:
-        print("You win")
-    dataBaseInput.dataBaseResults(correctOrNot,totalTime,stage)
+        print("You win well done. You have set up a base on the planet and\n you can now defend yourself from the creatures on this planet.")
+    dataBaseInput.dataBaseResults(totalCorrectAnswers,totalTime,stage)
     
-
+#questions (Done)
 def questions(rangeQuestions,correctOrNot,stage,totalTime,difficultyQuestions1,difficultyQuestions2):
     operatorList = ["+","-","x","/"]
     x = 0
     totalTimeStage = 0
-    operator = operatorList[x]
     for questions in range (0,rangeQuestions):
         number1 = random.randint(difficultyQuestions1[0],difficultyQuestions1[1])
         number2 = random.randint(difficultyQuestions2[0],difficultyQuestions2[1])
@@ -195,12 +194,13 @@ def questions(rangeQuestions,correctOrNot,stage,totalTime,difficultyQuestions1,d
             answerCorrect = "Incorrect"
             
         endTime = time.time()
-        x += 1
         print(answerCorrect)
         splitTime = round(endTime - startTime,3)
         totalTimeStage = round(totalTimeStage + splitTime,3)
         print("Time: ", splitTime)
+        operator = operatorList[x]
         dataBaseInput.dataBaseSaveQuestions(number1, operator, number2, correctAnswer, answer, answerCorrect,splitTime)
+        x += 1
         time.sleep(1)
         if x > 3:
             x = 0
@@ -213,13 +213,13 @@ def dataBaseCreation():
     DB.dataBaseQuestions();
     DB.dataBaseResults();
 
+
 #creating the databases tables for saving data
 dataBaseCreation();
 #Askingname speaks for it selfs. Uses the info the player gives to correctly save it.
-
 askingName();
 #loadingGame is just a visual loading bar nothing else
-#loadingGame();
+loadingGame();
 #progressBar is the progress bar at the top of the game. Keeping progress of the players progress.
 progressBar(2, 0);  
 theGame();

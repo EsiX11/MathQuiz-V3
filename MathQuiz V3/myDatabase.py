@@ -9,10 +9,10 @@ class dataBase():
     def dataBaseTests():
         c = conn.cursor()
         c.execute(''' CREATE TABLE IF NOT EXISTS Tests  (
-                    testID INTEGER PRIMARY KEY AUTOINCREMENT,
                     Name TEXT,
                     Surname TEXT,
-                    Class TEXT)
+                    Class TEXT,
+                    testID INTEGER PRIMARY KEY AUTOINCREMENT)
                     ''')
 
     def dataBaseQuestions():
@@ -25,10 +25,8 @@ class dataBase():
                     AnswerGiven INTEGER,
                     Correct TEXT,
                     Time_taken TEXT,
-                    testID INTEGER,
-                    CONSTRAINT fk_tests
-                        FOREIGN KEY(testID)
-                        REFERENCES Tests(testID))
+                    testID INTERGER,
+                        FOREIGN KEY (testID) REFERENCES Tests(testID))
                     ''')
 
     def dataBaseResults():
@@ -53,15 +51,19 @@ class dataBaseInput:
 
     def dataBaseSaveQuestions(number1, operator, number2, Answer, AnswerGiven, Correct, Time):
         c = conn.cursor()
-        c.execute(''' INSERT INTO Questions (number1, operator, number2, Answer, AnswerGiven, Correct, Time_taken)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
-                    ''', (number1, operator, number2, Answer, AnswerGiven, Correct, Time))
+        c.execute('''SELECT * FROM Tests WHERE testID = (SELECT MAX(testID)  FROM Tests) ''')
+        id = c.fetchone()
+        c.execute(''' INSERT INTO Questions (number1, operator, number2, Answer, AnswerGiven, Correct, Time_taken, testID)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    ''', (number1, operator, number2, Answer, AnswerGiven, Correct, Time, id[3]))
 
     def dataBaseResults(totalCorrectAnswers, totalTime , stage):
         c = conn.cursor()
-        c.execute(''' INSERT INTO Results (Correctly_answerd, Total_time, Final_Stage)
-                    VALUES (?, ?, ?)
-                    ''', (totalCorrectAnswers, totalTime, stage))
+        c.execute('''SELECT * FROM Tests WHERE testID = (SELECT MAX(testID)  FROM Tests) ''')
+        id = c.fetchone()
+        c.execute(''' INSERT INTO Results (Correctly_answerd, Total_time, Final_Stage, testID)
+                    VALUES (?, ?, ?, ?)
+                    ''', (totalCorrectAnswers, totalTime, stage, id[3]))
 
     # Commmit the changes
     def dataBaseCommit():
